@@ -5,15 +5,15 @@ import com.banking.transaction_service.dto.TransferRequest;
 import com.banking.transaction_service.entity.Transaction;
 import com.banking.transaction_service.repository.TransactionRepository;
 import com.banking.transaction_service.service.TransactionService;
+import jakarta.validation.Path;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/transaction")
@@ -22,11 +22,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransactionController {
     private final TransactionService transactionService;
 
-    @PostMapping("/"
+    @PostMapping("/")
     public ResponseEntity<TransactionResponse> transfer(
             @Valid @RequestBody TransferRequest request){
-        return ResponseEntity.status(HttpStatus.MULTI_ST)
+        return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.transfer(request));
     }
-            )
+    @GetMapping("/transactionId")
+    public ResponseEntity<TransactionResponse> getTransaction(@PathVariable String transactionId){
+        return ResponseEntity.ok(transactionService.getTransaction(transactionId));
+    }
+
+    @GetMapping("/accountNumber")
+    public ResponseEntity<List<TransactionResponse>> getTransactionHistory(@PathVariable String accountNumber){
+        return ResponseEntity.ok(transactionService.getTransactionHistory(accountNumber));
+    }
+
+    @PostMapping("/{transactionId/verify}/verify")
+    public ResponseEntity<TransactionResponse> verifyOtp(@PathVariable String transactionId,@PathVariable String otp){
+        log.info("OTP verification request transaction "+transactionId);
+        return  ResponseEntity.ok(transactionService.verifyOtp(transactionId,otp);
+
+    }
+
 
 }
