@@ -1,6 +1,5 @@
 package com.banking.transaction_service.entity;
 
-import com.banking.transaction_service.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

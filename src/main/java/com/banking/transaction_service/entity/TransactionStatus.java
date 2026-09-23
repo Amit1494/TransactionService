@@ -1,6 +1,6 @@
-package com.banking.transaction_service;
+package com.banking.transaction_service.entity;
 
-//Lifecyle flow
+//Lifecycle flow
 
 //        pending ,processing completed(clean Transaction )
 //                           ->pending_Verification(suspicious detected)

@@ -1,12 +1,10 @@
 package com.banking.transaction_service.dto;
 
-import com.banking.transaction_service.TransactionStatus;
+import com.banking.transaction_service.entity.TransactionStatus;
 import com.banking.transaction_service.entity.TransactionType;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
