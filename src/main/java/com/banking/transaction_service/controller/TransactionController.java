@@ -27,21 +27,20 @@ public class TransactionController {
             @Valid @RequestBody TransferRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.transfer(request));
     }
-    @GetMapping("/transactionId")
+    @GetMapping("/{transactionId}")
     public ResponseEntity<TransactionResponse> getTransaction(@PathVariable String transactionId){
         return ResponseEntity.ok(transactionService.getTransaction(transactionId));
     }
 
-    @GetMapping("/accountNumber")
+    @GetMapping("/account/{accountNumber}")
     public ResponseEntity<List<TransactionResponse>> getTransactionHistory(@PathVariable String accountNumber){
         return ResponseEntity.ok(transactionService.getTransactionHistory(accountNumber));
     }
 
-    @PostMapping("/{transactionId/verify}/verify")
-    public ResponseEntity<TransactionResponse> verifyOtp(@PathVariable String transactionId,@PathVariable String otp){
+    @PostMapping("/{transactionId}/verify")
+    public ResponseEntity<TransactionResponse> verifyOtp(@PathVariable String transactionId,@RequestParam String otp){
         log.info("OTP verification request transaction "+transactionId);
-        return  ResponseEntity.ok(transactionService.verifyOtp(transactionId,otp);
-
+        return  ResponseEntity.ok(transactionService.verifyOtp(transactionId,otp));
     }
 
 
